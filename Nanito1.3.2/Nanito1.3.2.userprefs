@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../Users/bryanmitchell/nanito/Nanito1.3.2/Nanito1.3.2/Assets/SampleScenes/Scripts/ParticleSceneControls.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BulletScript.cs">
     <Files>
-      <File FileName="../../../../../../Users/bryanmitchell/nanito/Nanito1.3.2/Nanito1.3.2/Assets/SampleScenes/Scripts/ParticleSceneControls.cs" Line="6" Column="1" />
+      <File FileName="Assets/Scripts/RobotArm.cs" Line="17" Column="2" />
+      <File FileName="Assets/Scripts/BulletScript.cs" Line="39" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
