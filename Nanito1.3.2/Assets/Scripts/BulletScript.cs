@@ -29,12 +29,14 @@ public class BulletScript : MonoBehaviour {
 		if (collision.gameObject.tag == "lever") {
 			if (LeverScript.hitcount == 2) {
 				RobotArm.move = true;
+				collision.isTrigger = true;
 			} else LeverScript.hitcount += 1;
 		}
 		
-		if (collision.gameObject.tag == "lever") {
+		if (collision.gameObject.tag == "lever1") {
 			if (LeverScript.hitcount1 == 2) {
 				RobotArm.move1 = true;
+				collision.isTrigger = true;
 			} else LeverScript.hitcount1 += 1;
 			
 		}

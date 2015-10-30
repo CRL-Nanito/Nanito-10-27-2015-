@@ -178,13 +178,13 @@ public class NanitoControllerScript : MonoBehaviour {
 			this.transform.parent = collision.transform;
 		}
 
-		if (collision.gameObject.tag == "lever"){
-			RobotArm.move = true;
-		}
-
-		if (collision.gameObject.tag == "lever1") {
-			RobotArm.move1 = true;
-		}
+//		if (collision.gameObject.tag == "lever"){
+//			RobotArm.move = true;
+//		}
+//
+//		if (collision.gameObject.tag == "lever1") {
+//			RobotArm.move1 = true;
+//		}
 
 		if (collision.gameObject.tag == "Boss") {
 			boss.gameObject.GetComponent<Renderer>().enabled = true;
