@@ -88,6 +88,7 @@
      <Compile Include="Assets\Scripts\RobotArm.cs" />
      <Compile Include="Assets\Scripts\RunHankey.cs" />
      <Compile Include="Assets\Scripts\ShieldCounterManager.cs" />
+     <Compile Include="Assets\Scripts\ShieldNumber.cs" />
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
      <Compile Include="Assets\Scripts\SpeedBooster.cs" />
      <Compile Include="Assets\Scripts\WingsCounter.cs" />

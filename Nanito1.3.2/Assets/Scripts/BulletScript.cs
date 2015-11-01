@@ -7,8 +7,25 @@ public class BulletScript : MonoBehaviour {
 		
 		if (collision.gameObject.tag == "Enemy") {
 			Destroy(this.gameObject);
+			Destroy(collision.gameObject);	
+		}
+
+		if (collision.gameObject.tag == "orange") {
+			Destroy(this.gameObject);
 			Destroy(collision.gameObject);
 			
+		}
+
+		if (collision.gameObject.tag == "red") {
+			Destroy(this.gameObject);
+			Destroy(collision.gameObject);
+
+		}
+
+		if (collision.gameObject.tag == "blue") {
+			Destroy(this.gameObject);
+			Destroy(collision.gameObject);
+
 		}
 		
 		if (collision.gameObject.tag == "platform") {
@@ -20,6 +37,7 @@ public class BulletScript : MonoBehaviour {
 			Destroy(this.gameObject);
 			
 		}
+
 		
 		if (collision.gameObject.tag == "lever1") {
 			Destroy(this.gameObject);

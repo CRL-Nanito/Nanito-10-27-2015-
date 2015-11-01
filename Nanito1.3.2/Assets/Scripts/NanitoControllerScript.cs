@@ -16,18 +16,20 @@ public class NanitoControllerScript : MonoBehaviour {
 	int wingsCounter = 0;
 	bool grounded = false;
 	bool shieldFlag = false;
-	bool damagePlayer = false;
+	public bool damagePlayer = false;
 	bool blueCellDamage = false;
 	bool orangeCellDamage = false;
 	bool redCellDamage = false;
 
 	int counter;
 	bool gunFlag;
+	public int shieldHits;
 
-	float respawnPosX = -284.7662f;
-	float respawnPosY = -8.521203f;
+	public float respawnPosX = -284.7662f;
+	public float respawnPosY = -8.521203f;
 
 	public GameObject shieldGO;
+
 	public Camera camera;
 
 	public Transform groundCheck;
@@ -105,35 +107,39 @@ public class NanitoControllerScript : MonoBehaviour {
 		PopUpScript popUp = collision.gameObject.GetComponent<PopUpScript> ();
 		BossFight boss = collision.gameObject.GetComponent<BossFight> ();
 		ShieldScript shield = collision.gameObject.GetComponent<ShieldScript> ();
+		ShieldNumber shieldnumber = collision.gameObject.GetComponent<ShieldNumber> ();
 		FfScript ffBottle = collision.gameObject.GetComponent<FfScript> ();
 		WingsCounter wings = collision.gameObject.GetComponent<WingsCounter> ();
 		RobotArm robot = GetComponent<RobotArm> ();
-
 		OrangeCell orangeCell = collision.gameObject.GetComponent<OrangeCell>();
 		RedCell redCell = collision.gameObject.GetComponent<RedCell>();
 		BlueCell blueCell = collision.gameObject.GetComponent<BlueCell>();
+
 	
 		//BridgePlatformScript bridge = GetComponent<BridgePlatformScript> ();
 
-		
-		if(redCell != null & !damagePlayer){
+		if (collision.gameObject.tag == "orange") {
 			damagePlayer = true;
-			if(playerHealth != null) playerHealth.Damage(redCell.damage,respawnPosX,respawnPosY);
-		}
-		if(blueCell != null & !damagePlayer){
-			damagePlayer = true;
-			if(playerHealth != null) playerHealth.Damage(blueCell.damage,respawnPosX,respawnPosY);
-		}
-		if(orangeCell != null & !damagePlayer){
-			damagePlayer = true;
-			if(playerHealth != null) playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY);
+			Debug.Log("shield not hit");
+			if(playerHealth != null) 
+				playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY,false);
 		}
 
-		if (collision.gameObject.tag == "Enemy") {
+		if (collision.gameObject.tag == "red") {
 			damagePlayer = true;
+			Debug.Log("shield not hit");
+			if(playerHealth != null) 
+				playerHealth.Damage(redCell.damage,respawnPosX,respawnPosY,false);
 		}
 
+		if (collision.gameObject.tag == "blue") {
+			damagePlayer = true;
+			Debug.Log("shield not hit");
+			if(playerHealth != null) 
+				playerHealth.Damage(blueCell.damage,respawnPosX,respawnPosY,false);
+		}
 
+			
 		if (floor != null) {
 			damagePlayer = true;
 			hell = true;
@@ -141,7 +147,7 @@ public class NanitoControllerScript : MonoBehaviour {
 
 
 		if (hell) {
-			if(playerHealth != null) playerHealth.Damage(floor.damage,respawnPosX,respawnPosY);
+			if(playerHealth != null) playerHealth.Damage(floor.damage,respawnPosX,respawnPosY,false);
 		}
 		if(collision.gameObject.name == "Checkpoint1") {
 			CheckpointScript checkpoint = collision.gameObject.GetComponent<CheckpointScript>();
@@ -210,8 +216,8 @@ public class NanitoControllerScript : MonoBehaviour {
 		}
 
 		if (collision.gameObject.tag == "shield") {
-			ShieldCounterManager.AddShield(shield.shieldNumber);
-			Destroy(shield.gameObject);
+			ShieldCounterManager.AddShield(shieldnumber.shieldNumber);
+			Destroy(shieldnumber.gameObject);
 			shieldFlag = true;
 			Debug.Log("Shield available");
 		}
@@ -276,16 +282,7 @@ public class NanitoControllerScript : MonoBehaviour {
 			BridgePlatformScript.bridge7 = true;
 
 		}
-		
-		if (gunGO.activeSelf == true && Input.GetButtonDown ("Shield")) {
-			gunGO.SetActive(false);
-			shieldGO.SetActive(true);
-		}
-		if (collision.gameObject.tag == "ffbottle") {
-			FfCounterManager.AddFF(ffBottle.ffNumber);
-			gunFlag = true;
-			Destroy(ffBottle.gameObject);
-		}
+
 		
 		
 	}
@@ -311,14 +308,16 @@ public class NanitoControllerScript : MonoBehaviour {
 			
 			GetComponent<Rigidbody2D> ().AddForce (new Vector2 (0, newJumpForce));
 		}
+
 		//activate gun
-		if (gunFlag == true && Input.GetButtonDown ("Fire1")) {
+		if ((gunFlag == true || shieldGO.activeSelf == true) && Input.GetButtonDown ("Fire1")) {
+			shieldGO.SetActive(false);
 			gunGO.SetActive (true);
 			Debug.Log ("say hello");
 			counter++;
 			
 			if(Input.GetButtonDown ("Fire1") && counter >= 2){
-				counter++;
+				//counter = 0;
 				FfCounterManager.ffScore--;
 			}
 			
@@ -326,21 +325,33 @@ public class NanitoControllerScript : MonoBehaviour {
 				gunFlag = false;
 				gunGO.SetActive(false);
 			}
+			
 		}
 
 		//activate shield
-		if (shieldFlag == true && Input.GetButtonDown ("Shield")) {
+		if ((shieldFlag == true || gunGO.activeSelf == true) && Input.GetButtonDown ("Shield")) {
+			gunGO.SetActive (false);
 			shieldGO.SetActive (true);
 			ShieldCounterManager.shieldScore--;
+			shieldHits = 3;
 			Debug.Log ("shield me bitch");
-			StartCoroutine (ShieldDelay ());
-			Debug.Log ("bye shield");
+			counter = 0;
 
 			if (shieldFlag == true && ShieldCounterManager.shieldScore == 0) {
 				shieldFlag = false;
+				shieldGO.SetActive(false);
 			}
 		}
 
+		if (shieldHits == 0)
+			shieldGO.SetActive (false);
+
+//		if (gunGO.activeSelf == true && Input.GetButtonDown ("Shield")) {
+//			gunGO.SetActive(false);
+//			shieldGO.SetActive(true);
+//		}
+//		
+		
 		// If the player has just been damaged...
 		if(damagePlayer)
 		{
@@ -380,11 +391,6 @@ public class NanitoControllerScript : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-	IEnumerator ShieldDelay(){
-		yield return new WaitForSeconds (3);
-		shieldGO.SetActive(false);
-	}
-	
 
 	void OnCollisionExit2D(Collision2D collision){
 		if (collision.gameObject.tag == "MovingPlatform"){
@@ -426,7 +432,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -439,7 +445,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -456,7 +462,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -469,7 +475,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -490,7 +496,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -503,7 +509,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -524,7 +530,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -541,7 +547,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -558,7 +564,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;
@@ -575,7 +581,7 @@ public class NanitoControllerScript : MonoBehaviour {
 				correct_answer = 0;
 				clicks++;
 				if(playerHealth != null) {
-					playerHealth.Damage(4,respawnPosX,respawnPosY);
+					playerHealth.Damage(4,respawnPosX,respawnPosY,false);
 				} 
 				if (clicks == 3) {
 					showPopUp = false;

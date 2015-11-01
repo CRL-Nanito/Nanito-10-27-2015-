@@ -10,12 +10,17 @@ public class HealthScript : MonoBehaviour {
 
 
 
-	public void Damage(int damageCount, float respawnPosX, float respawnPosY){
+	public void Damage(int damageCount, float respawnPosX, float respawnPosY, bool shield){
 
 		// Set the damaged flag so the screen will flash.
-		damaged = true;
+		//damaged = true;
+		if (shield == false) {
+			hp -= damageCount;
+		} else {
+			hp += damageCount;
+			Debug.Log ("hp");
 
-		hp -= damageCount;
+		}
 
 		if (hp <= 0) {
 			StartCoroutine(Dead (respawnPosX,respawnPosY));

@@ -10,4 +10,15 @@ public class OrangeCell : MonoBehaviour {
 	void Start () {
 	
 	}
+
+	void OnCollisionEnter2D(Collision2D collision){
+		
+		NanitoControllerScript nanito = GetComponent<NanitoControllerScript> ();
+		
+		if (collision.gameObject.tag == "bullet") {
+			
+			Destroy(this.gameObject);
+		}
+		
+	}
 }

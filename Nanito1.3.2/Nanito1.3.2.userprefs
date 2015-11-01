@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BulletScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NanitoControllerScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/RobotArm.cs" Line="17" Column="2" />
-      <File FileName="Assets/Scripts/BulletScript.cs" Line="39" Column="32" />
+      <File FileName="Assets/Scripts/NanitoControllerScript.cs" Line="219" Column="62" />
+      <File FileName="Assets/Scripts/ShieldScript.cs" Line="20" Column="33" />
+      <File FileName="Assets/Scripts/HealthScript.cs" Line="20" Column="22" />
+      <File FileName="Assets/Scripts/Gun.cs" Line="50" Column="34" />
+      <File FileName="Assets/Scripts/ShieldNumber.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

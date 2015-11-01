@@ -45,20 +45,14 @@ public class Gun : MonoBehaviour {
 	}
 	void Shoot(){
 		//Debug.Log ("Test");
-		//		Vector2 mousePosition = new Vector2 (transform.parent.position.x, transform.parent.position.y);	
 		Vector2 firePointPosition = new Vector2 (firePoint.position.x, firePoint.position.y);
-		//		RaycastHit2D hit = Physics2D.Raycast (firePointPosition, mousePosition - firePointPosition, 100, whatToHit);
-		//		Debug.DrawLine (firePointPosition, (mousePosition - firePointPosition)*100, Color.cyan);
-		//		if (hit.collider != null) {
-		//			Debug.DrawLine(firePointPosition, hit.point, Color.red);
-		//			Debug.Log ("We hit "+ hit.collider.name + " and did " + Damage + " damage.");
-		//		}
 		
 		NanitoControllerScript nanito = nanitoGO.GetComponent<NanitoControllerScript>();
 		
 		Debug.Log ("Test");
 		
 		clone = (GameObject) Instantiate(projectile, firePointPosition, Quaternion.identity);
+		//clone.tag = "bullet";
 		if (nanito.facingRight) 
 			clone.gameObject.GetComponent<Rigidbody2D> ().velocity = transform.right * speed;
 		else {
