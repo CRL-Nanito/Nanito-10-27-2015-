@@ -14,6 +14,8 @@ public class ProgressBar : MonoBehaviour {
 	bool circulo = false;
 	bool triangulo = false;
 
+    public float energyFactor;
+
 	public Image fadeimage;
 	public Image finalimage;
 	public float fadespeed = 30f;
@@ -66,7 +68,7 @@ public class ProgressBar : MonoBehaviour {
 	void Update() {
 		if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)|| Input.GetAxis("Vertical")> 0 
 		   || Input.GetAxis("Vertical")< 0 ){
-			slider.value = slider.value - 0.002f ;
+			slider.value = slider.value - energyFactor ;
 		}
 		else if(refuel){
 			slider.value = slider.value + 0.007f;
