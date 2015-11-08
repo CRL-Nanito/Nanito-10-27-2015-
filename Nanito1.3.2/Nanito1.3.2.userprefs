@@ -1,12 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NanitoControllerScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/OrangeCell.cs">
     <Files>
-      <File FileName="Assets/Scripts/NanitoControllerScript.cs" Line="219" Column="62" />
-      <File FileName="Assets/Scripts/ShieldScript.cs" Line="20" Column="33" />
-      <File FileName="Assets/Scripts/HealthScript.cs" Line="20" Column="22" />
-      <File FileName="Assets/Scripts/Gun.cs" Line="50" Column="34" />
-      <File FileName="Assets/Scripts/ShieldNumber.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NanitoControllerScript.cs" Line="281" Column="43" />
+      <File FileName="Assets/Scripts/BridgePlatformScript.cs" Line="2" Column="19" />
+      <File FileName="Assets/Scripts/MazePlatform.cs" Line="19" Column="4" />
+      <File FileName="Assets/Scripts/PlatformActivator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/OrangeCell.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

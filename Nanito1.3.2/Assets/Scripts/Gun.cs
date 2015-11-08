@@ -49,7 +49,7 @@ public class Gun : MonoBehaviour {
 		
 		NanitoControllerScript nanito = nanitoGO.GetComponent<NanitoControllerScript>();
 		
-		Debug.Log ("Test");
+		//Debug.Log ("Test");
 		
 		clone = (GameObject) Instantiate(projectile, firePointPosition, Quaternion.identity);
 		//clone.tag = "bullet";

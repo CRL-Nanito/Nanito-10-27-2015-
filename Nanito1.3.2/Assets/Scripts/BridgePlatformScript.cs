@@ -15,13 +15,13 @@
 	
 	void Start () {
 		anim = GetComponent<Animator>();
-		anim.SetBool ("Bridge1", false);
-		anim.SetBool ("Bridge2", false);
-		anim.SetBool ("Bridge3", false);
-		anim.SetBool ("Bridge4", false);
-		anim.SetBool ("Bridge5", false);
-		anim.SetBool ("Bridge6", false);
-		anim.SetBool ("Bridge7", false);
+//		anim.SetBool ("Bridge1", false);
+//		anim.SetBool ("Bridge2", false);
+//		anim.SetBool ("Bridge3", false);
+//		anim.SetBool ("Bridge4", false);
+//		anim.SetBool ("Bridge5", false);
+//		anim.SetBool ("Bridge6", false);
+//		anim.SetBool ("Bridge7", false);
 	}
 	
 	void Update () {

@@ -2,8 +2,15 @@
 using System.Collections;
 
 public class BulletScript : MonoBehaviour {
+
+	public int count;
 	
 	void OnTriggerEnter2D(Collider2D collision){
+
+		MetalCell metalCell = collision.gameObject.GetComponent<MetalCell>();
+		NanitoControllerScript nanito = collision.gameObject.GetComponent<NanitoControllerScript>();
+
+
 		
 		if (collision.gameObject.tag == "Enemy") {
 			Destroy(this.gameObject);
@@ -25,6 +32,12 @@ public class BulletScript : MonoBehaviour {
 		if (collision.gameObject.tag == "blue") {
 			Destroy(this.gameObject);
 			Destroy(collision.gameObject);
+
+		}
+
+		if (collision.gameObject.tag == "metal") {
+			metalCell.count++;
+			Destroy(this.gameObject);
 
 		}
 		

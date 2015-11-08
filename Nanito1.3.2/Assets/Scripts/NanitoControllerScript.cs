@@ -114,15 +114,34 @@ public class NanitoControllerScript : MonoBehaviour {
 		OrangeCell orangeCell = collision.gameObject.GetComponent<OrangeCell>();
 		RedCell redCell = collision.gameObject.GetComponent<RedCell>();
 		BlueCell blueCell = collision.gameObject.GetComponent<BlueCell>();
+		MetalCell metalCell = collision.gameObject.GetComponent<MetalCell>();
+		MazePlatform maze = collision.gameObject.GetComponent<MazePlatform>();
 
-	
+		
 		//BridgePlatformScript bridge = GetComponent<BridgePlatformScript> ();
 
 		if (collision.gameObject.tag == "orange") {
-			damagePlayer = true;
-			Debug.Log("shield not hit");
-			if(playerHealth != null) 
-				playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY,false);
+//			damagePlayer = true;
+//			Debug.Log("shield not hit");
+//			if(playerHealth != null) 
+//				playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY,false);
+
+			if(shieldGO.activeSelf == true) {
+				damagePlayer = false;
+				shieldHits--;
+				metalCell.hitByShield = true;
+				Debug.Log("shield hit");
+				//orangeCell = null;
+				if(playerHealth != null)
+					playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY,true);
+				
+			}
+			else{
+				damagePlayer = true;
+				Debug.Log("shield not hit");
+				if(playerHealth != null) 
+					playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY,false);
+			}
 		}
 
 		if (collision.gameObject.tag == "red") {
@@ -137,6 +156,27 @@ public class NanitoControllerScript : MonoBehaviour {
 			Debug.Log("shield not hit");
 			if(playerHealth != null) 
 				playerHealth.Damage(blueCell.damage,respawnPosX,respawnPosY,false);
+		}
+
+		if (collision.gameObject.tag == "metal") {
+			//			damagePlayer = true;
+			//			Debug.Log("shield not hit");
+			//			if(playerHealth != null) 
+			//				playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY,false);
+			
+			if(shieldGO.activeSelf == true) {
+				damagePlayer = false;
+				shieldHits--;
+				metalCell.hitByShield = true;
+				Debug.Log("shield hit");
+				
+			}
+			else{
+				damagePlayer = true;
+				Debug.Log("shield not hit");
+				if(playerHealth != null) 
+					playerHealth.Damage(orangeCell.damage,respawnPosX,respawnPosY,false);
+			}
 		}
 
 			
@@ -225,6 +265,7 @@ public class NanitoControllerScript : MonoBehaviour {
 
 		if (collision.gameObject.tag == "ffbottle") {
 			FfCounterManager.AddFF(ffBottle.ffNumber);
+			gunFlag = true;
 			Destroy(ffBottle.gameObject);
 		}
 
@@ -247,40 +288,36 @@ public class NanitoControllerScript : MonoBehaviour {
 		}
 
 		if (collision.gameObject.tag == "Bridge1") {
-			//bridgeAnim.Play("Bridge");
-			//bridgeAnim.SetBool("Bridge1", true);
 			BridgePlatformScript.bridge1 = true;
 
 		}
 		if (collision.gameObject.tag == "Bridge2") {
-			//bridgeAnim.SetBool("Bridge2", true);
 			BridgePlatformScript.bridge2 = true;
 
 		}
 		if (collision.gameObject.tag == "Bridge3") {
-			//bridgeAnim.SetBool("Bridge3", true);
 			BridgePlatformScript.bridge3 = true;
 
 		}
 		if (collision.gameObject.tag == "Bridge4") {
-			//bridgeAnim.SetBool("Bridge4", true);
 			BridgePlatformScript.bridge4 = true;
 
 		}
 		if (collision.gameObject.tag == "Bridge5") {
-			//bridgeAnim.SetBool("Bridge5", true);
 			BridgePlatformScript.bridge5 = true;
 
 		}
 		if (collision.gameObject.tag == "Bridge6") {
-			//bridgeAnim.SetBool("Bridge6", true);
 			BridgePlatformScript.bridge6 = true;
 
 		}
 		if (collision.gameObject.tag == "Bridge7") {
-			//bridgeAnim.SetBool("Bridge7", true);
 			BridgePlatformScript.bridge7 = true;
 
+		}
+		if (collision.gameObject.name == "MetallicFloorFerroFluidMAP 159") {
+			MazePlatform.ground = true;
+			transform.parent = collision.transform;
 		}
 
 		
@@ -317,7 +354,8 @@ public class NanitoControllerScript : MonoBehaviour {
 			counter++;
 			
 			if(Input.GetButtonDown ("Fire1") && counter >= 2){
-				//counter = 0;
+				counter++;
+				Debug.Log("shot fired");
 				FfCounterManager.ffScore--;
 			}
 			
@@ -346,6 +384,20 @@ public class NanitoControllerScript : MonoBehaviour {
 		if (shieldHits == 0)
 			shieldGO.SetActive (false);
 
+		//laberinto 1 camera zoom
+		if (((-143.4f) < this.gameObject.transform.position.x && this.gameObject.transform.position.x < (-12.6f)) && ((23f) < this.gameObject.transform.position.y && this.gameObject.transform.position.y < (103.8f))) {
+			camera.orthographicSize = 15;
+		} 
+		//laberinto 2 zoom
+		else if (((820.4f) < this.gameObject.transform.position.x && this.gameObject.transform.position.x < (1051.9f)) && ((-134.8f) < this.gameObject.transform.position.y && this.gameObject.transform.position.y < (-16.2f))) {
+			camera.orthographicSize = 15;
+		}
+		else {
+			camera.orthographicSize = 25;
+		}
+
+
+
 //		if (gunGO.activeSelf == true && Input.GetButtonDown ("Shield")) {
 //			gunGO.SetActive(false);
 //			shieldGO.SetActive(true);
@@ -371,16 +423,6 @@ public class NanitoControllerScript : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-		if(other.gameObject.name == "CameraZoomInCP0" || other.gameObject.name == "CameraZoomInCP1" || other.gameObject.name == "CameraZoomInCP2" || other.gameObject.name == "CameraZoomInCP3"){
-			camera.orthographicSize = 15;
-		}
-		if(other.gameObject.name == "CameraZoomOutCP0" || other.gameObject.name == "CameraZoomOutCP1" || other.gameObject.name == "CameraZoomOutCP2" || other.gameObject.name == "CameraZoomOutCP3"){
-			camera.orthographicSize = 25;
-		}
-
-	}
-	
 
 
 	//Flip world 180
