@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/OrangeCell.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RobotArm.cs">
     <Files>
-      <File FileName="Assets/Scripts/NanitoControllerScript.cs" Line="281" Column="43" />
-      <File FileName="Assets/Scripts/BridgePlatformScript.cs" Line="2" Column="19" />
-      <File FileName="Assets/Scripts/MazePlatform.cs" Line="19" Column="4" />
-      <File FileName="Assets/Scripts/PlatformActivator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/OrangeCell.cs" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Vehicles/Car/Scripts/ProgressBar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Vehicles/Car/Scripts/CarUserControl.cs" Line="83" Column="51" />
+      <File FileName="Assets/Scripts/PopUpScript.cs" Line="17" Column="52" />
+      <File FileName="Assets/Scripts/NanitoControllerScript.cs" Line="88" Column="4" />
+      <File FileName="Assets/Scripts/RobotArm.cs" Line="14" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
