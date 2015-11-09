@@ -76,9 +76,13 @@ namespace UnityStandardAssets.Vehicles.Car
             if(other.gameObject.tag == "cloud")
             {
                 GetComponent<ProgressBar>().cloudRefuel = false;
-                StartCoroutine(cloudWait(other));
-                other.transform.position = car.transform.position;
+				other.gameObject.GetComponent<Animator>().enabled = false;
+				float x = car.transform.position.x;
+				float y = other.transform.position.y;
+				float z = car.transform.position.z;
+				other.transform.position = new Vector3(x,y,z);
                 other.transform.parent = car.transform;
+				StartCoroutine(cloudWait(other));
             }
         }
 

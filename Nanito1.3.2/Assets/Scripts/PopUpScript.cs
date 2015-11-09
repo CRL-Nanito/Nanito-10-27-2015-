@@ -4,12 +4,25 @@ using System.Collections;
 public class PopUpScript : MonoBehaviour {
 	public bool showPopUp = false;
 	public Texture2D background;
+	public GameObject popup;
+	public Sprite atomo1;
 
 	void OnTriggerEnter2D(Collider2D otherObject){
 		
 		if(otherObject.tag == "Player") {
-			showPopUp = true;
+			//showPopUp = true;
+			popup.GetComponent<SpriteRenderer>().sprite = atomo1;
+			popup.SetActive(true);
+			this.GetComponent<SpriteRenderer>().enabled = false;
+			this.GetComponent<Collider2D>().enabled = false;
 		}
+	}
+
+	void Update () {
+		if (Input.GetButtonDown("Return")) {
+			popup.SetActive(false);
+		}
+
 	}
 	
 

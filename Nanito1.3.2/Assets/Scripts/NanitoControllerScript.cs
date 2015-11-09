@@ -46,6 +46,7 @@ public class NanitoControllerScript : MonoBehaviour {
 	public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flas
 
+	public GameObject PopUp;
 
 	// Use this for initialization
 	void Start () {
@@ -56,6 +57,7 @@ public class NanitoControllerScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
+		PopUpScript popup = GetComponent<PopUpScript> ();
 
 		//detects colliders
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
@@ -75,13 +77,22 @@ public class NanitoControllerScript : MonoBehaviour {
 		//handles the anims
 		anim.SetFloat ("Speed", Mathf.Abs (move));
 
-		GetComponent<Rigidbody2D>().velocity = new Vector2 (move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 (move * maxSpeed, GetComponent<Rigidbody2D> ().velocity.y);
 
-		if (move > 0 && !facingRight) 
+		if (move > 0 && !facingRight) {
 			Flip ();
-		else if (move < 0 && facingRight) 
+			float x = PopUp.transform.localScale.x;
+			float y = PopUp.transform.localScale.y;
+			float z = PopUp.transform.localScale.z;
+			PopUp.transform.localScale = new Vector3 (-x, y, z);
+		}
+		else if (move < 0 && facingRight) {
 			Flip ();
-				
+			float x = PopUp.transform.localScale.x;
+			float y = PopUp.transform.localScale.y;
+			float z = PopUp.transform.localScale.z;
+			PopUp.transform.localScale = new Vector3 (-x, y, z);
+		}
 
 //		if (Input.GetMouseButtonDown (0)) {
 //			Destroy(this.gameObject);
@@ -214,11 +225,11 @@ public class NanitoControllerScript : MonoBehaviour {
 			Destroy(collision.gameObject.GetComponent<Collider2D>());
 		}
 
-		if (collision.gameObject.name == "atomo") {
-			popUp.showPopUp = true;
-			popUp.gameObject.GetComponent<Renderer>().enabled = false;
-			Destroy(popUp.gameObject.GetComponent<Collider2D>());
-		}
+//		if (collision.gameObject.name == "atomo") {
+//			popUp.showPopUp = true;
+//			popUp.gameObject.GetComponent<Renderer>().enabled = false;
+//			Destroy(popUp.gameObject.GetComponent<Collider2D>());
+//		}
 
 		if (collision.gameObject.tag == "MovingPlatform"){
 			this.transform.parent = collision.transform;
